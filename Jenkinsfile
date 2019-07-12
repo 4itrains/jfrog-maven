@@ -51,12 +51,12 @@ node {
     }
     
     stage('Status Notification'){
-        def mailRecipients = "ramesh.thadivada@gmail.com"
+        def mailRecipients = "ashish.ashp@gmail.com"
         def subject = "${env.JOB_NAME} - Build #${env.BUILD_NUMBER}- ${currentBuild.result}"
        
         mail bcc: '',
              from: 'manee2k6@gmail.com',
-             to: 'manee2k6@gmail.com, ramesh.thadivada@gmail.com',
+             to: 'ashish.ashp@gmail.com',
              subject: subject,
              body: "Build Number: #${env.BUILD_NUMBER}  Status:${currentBuild.result} Build URL: ${env.BUILD_URL}"
           
