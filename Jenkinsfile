@@ -13,11 +13,23 @@ node {
         rtMaven.run pom: 'pom.xml', goals: 'clean test'
     }
     
-    stage('SonarQube Analysis') {
+    //stage('SonarQube Analysis') {
         //rtMaven.run pom: 'maven-example/pom.xml', goals: 'clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=pattabhi -Dsonar.login=df5bb81bae9ba310d6a38135b957227ba6ecd32c '
-     
+        
          
+     // }
+    
+    stage('SonarScan') {
+      //withSonarQubeEnv('sonar') {
+         withMaven(jdk: 'JDK-1.8', maven: 'Maven-3.6.1') {
+             //sh 'mvn clean package sonar:sonar' 
+             sh ' mvn org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar ' +
+             ' -Dsonar.host.url=https://sonarcloud.io ' +
+             ' -Dsonar.organization=jfrog '+ 
+             ' -Dsonar.login=ac9d4e50459a71a808e9d31a2448987f4998ff1d '   
+         //}
       }
+   }
     
     stage ('Artifactory configuration') {
         // Obtain an Artifactory server instance, defined in Jenkins --> Manage..:
